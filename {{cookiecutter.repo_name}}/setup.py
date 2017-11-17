@@ -26,7 +26,7 @@ setup(
     package_dir={"": "src"},
     include_package_data=True,
     zip_safe=False,
-    install_requires=[{{ ', '.join('"{0}"'.format(p) for p in cooiecutter.requires.split()) if cookiecutter.requires != '' else '' }}],
+    install_requires=[{{ (', '.join('"{0}"'.format(p) for p in cookiecutter.requires.split())) if cookiecutter.requires != '-' else '' }}],
     extras_require={
         'dev': ['flake8', 'wheel', 'twine'],
         'test': [
