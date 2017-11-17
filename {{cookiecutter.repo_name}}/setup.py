@@ -26,7 +26,7 @@ setup(
     package_dir={"": "src"},
     include_package_data=True,
     zip_safe=False,
-    install_requires=[{{ (', '.join('"{0}"'.format(p) for p in cookiecutter.requires.split())) if cookiecutter.requires != '-' else '' }}],
+    install_requires=[],
     extras_require={
         'dev': ['flake8', 'wheel', 'twine'],
         'test': [
@@ -35,7 +35,6 @@ setup(
             'mock',
             'coverage>=4.2',
             'pytest-cov',
-            {{ 'webtest' if cookiecutter.with_webtest != "-" else ''}}
         ],
     },
     license="Apache 2.0",

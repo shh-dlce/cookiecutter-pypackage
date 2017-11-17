@@ -7,7 +7,5 @@
 	"description": "",
 	"version": "0.1.0",
         "keywords": "-",
-        "requires": "-",
-        "with_webtest": "-",
         "cli_name": "-"
 }
