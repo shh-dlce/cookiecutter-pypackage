@@ -17,6 +17,5 @@ Then:
 
 * Create a repo and put it there.
 * Add the repo to your Travis CI account.
-* Run `tox` to make sure all tests pass.
-* Release your package the standard Python way.
+* Follow the instructions in the projects RELEASING.md to release the package on pypi.
 
