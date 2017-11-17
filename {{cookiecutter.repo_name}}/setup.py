@@ -21,12 +21,12 @@ setup(
     author='{{ cookiecutter.author }}',
     author_email='{{ cookiecutter.email }}',
     url='https://github.com/{{ cookiecutter.github_org }}/{{ cookiecutter.repo_name }}',
-    keywords='{{ cookiecutter.keywords }}',
+    keywords='{{ cookiecutter.keywords if cookiecutter.keywords != "-" else "" }}',
     packages=find_packages(where="src"),
     package_dir={"": "src"},
     include_package_data=True,
     zip_safe=False,
-    install_requires={{ cookiecutter.requires }},
+    install_requires=[{{ ', '.join('"{0}"'.format(p) for p in cooiecutter.requires.split()) if cookiecutter.requires != '' else '' }}],
     extras_require={
         'dev': ['flake8', 'wheel', 'twine'],
         'test': [
@@ -35,11 +35,11 @@ setup(
             'mock',
             'coverage>=4.2',
             'pytest-cov',
-            {{ 'webtest' if cookiecutter.with_webtest else ''}}
+            {{ 'webtest' if cookiecutter.with_webtest != "-" else ''}}
         ],
     },
     license="Apache 2.0",
-    {% if cookiecutter.cli_name %}
+    {% if cookiecutter.cli_name != '-' %}
     entry_points={
         'console_scripts': [
             "{{ cookiecutter.cli_name }} = {{ cookiecutter.pkg_name }}.__main__:main",
