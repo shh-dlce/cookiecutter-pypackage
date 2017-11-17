@@ -1,54 +1,50 @@
-#!/usr/bin/env python
-
-import os
-import sys
-
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
+from setuptools import setup, find_packages
 
 
-if sys.argv[-1] == 'publish':
-    os.system('python setup.py sdist upload')
-    sys.exit()
+def read(fname):
+    with open(fname) as fp:
+        content = fp.read()
+    return content
 
-readme = open('README.rst').read()
-doclink = """
-Documentation
--------------
-
-The full documentation is at http://{{ cookiecutter.repo_name }}.rtfd.org."""
-history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
 setup(
     name='{{ cookiecutter.repo_name }}',
     version='{{ cookiecutter.version }}',
-    description='{{ cookiecutter.project_short_description }}',
-    long_description=readme + '\n\n' + doclink + '\n\n' + history,
-    author='{{ cookiecutter.full_name }}',
-    author_email='{{ cookiecutter.email }}',
-    url='https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }}',
-    packages=[
-        '{{ cookiecutter.repo_name }}',
-    ],
-    package_dir={'{{ cookiecutter.repo_name }}': '{{ cookiecutter.repo_name }}'},
-    include_package_data=True,
-    install_requires=[
-    ],
-    license='MIT',
-    zip_safe=False,
-    keywords='{{ cookiecutter.repo_name }}',
+    description='{{ cookiecutter.description }}',
+    long_description=read("README.rst"),
     classifiers=[
-        'Development Status :: 2 - Pre-Alpha',
-        'Intended Audience :: Developers',
-        'License :: OSI Approved :: MIT License',
-        'Natural Language :: English',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.6',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: Implementation :: PyPy',
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.4",
     ],
+    author='{{ cookiecutter.author }}',
+    author_email='{{ cookiecutter.email }}',
+    url='https://github.com/{{ cookiecutter.github_org }}/{{ cookiecutter.repo_name }}',
+    keywords='{{ cookiecutter.keywords }}',
+    packages=find_packages(where="src"),
+    package_dir={"": "src"},
+    include_package_data=True,
+    zip_safe=False,
+    install_requires={{ cookiecutter.requires }},
+    extras_require={
+        'dev': ['flake8', 'wheel', 'twine'],
+        'test': [
+            'pytest>=3.1',
+            'pytest-mock',
+            'mock',
+            'coverage>=4.2',
+            'pytest-cov',
+            {{ 'webtest' if cookiecutter.with_webtest else ''}}
+        ],
+    },
+    license="Apache 2.0",
+    {% if cookiecutter.cli_name %}
+    entry_points={
+        'console_scripts': [
+            "{{ cookiecutter.cli_name }} = {{ cookiecutter.pkg_name }}.__main__:main",
+        ]
+    },
+    {% endif %}
 )
+

@@ -1,18 +1,15 @@
 =============================
-{{ cookiecutter.project_name }}
+{{ cookiecutter.repo_name }}
 =============================
 
-.. image:: https://badge.fury.io/py/{{ cookiecutter.repo_name }}.png
-    :target: http://badge.fury.io/py/{{ cookiecutter.repo_name }}
+.. image:: https://travis-ci.org/{{ cookiecutter.github_org }}/{{ cookiecutter.repo_name }}.svg?branch=master
+        :target: https://travis-ci.org/{{ cookiecutter.github_org }}/{{ cookiecutter.repo_name }}
 
-.. image:: https://travis-ci.org/{{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }}.png?branch=master
-    :target: https://travis-ci.org/{{ cookiecutter.github_username }}/{{ cookiecutter.repo_name }}
+.. image:: https://codecov.io/gh/{{ cookiecutter.github_org }}/{{ cookiecutter.repo_name }}/branch/master/graph/badge.svg
+        :target: https://codecov.io/gh/{{ cookiecutter.github_org }}/{{ cookiecutter.repo_name }}
 
-{{ cookiecutter.project_short_description}}
+.. image:: https://img.shields.io/pypi/v/{{ cookiecutter.repo_name }}.svg
+        :target: https://pypi.python.org/pypi/{{ cookiecutter.repo_name }}
 
-
-Features
---------
-
-* TODO
+{{ cookiecutter.description}}
 
